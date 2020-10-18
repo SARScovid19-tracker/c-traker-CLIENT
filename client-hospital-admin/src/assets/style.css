@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.login-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.left-login-page {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.left-login-page h3 {
+    font-size: 1.5rem;
+}
+
+.left-login-page form {
+    display: flex;
+    flex-direction: column;
+}
+
+.left-login-page form input{
+    margin: 1rem 0;
+}
+
+.left-login-page button {
+    background-color: #CCEABB;
+    border-radius: 12px;
+    border: none;
+    padding: 5px;
+    font-size: 1rem;
+    color: black;
+    margin-top: 10px;
+}
+
+.left-login-page p {
+    font-size: 1.5rem;
+}
+
+.right-login-page h1 {
+    font-size: 2.5rem;
+}
+
+.right-login-page {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-login-page img {
+    width: 90%;
+}
