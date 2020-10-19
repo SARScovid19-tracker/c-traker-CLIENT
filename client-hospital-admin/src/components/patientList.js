@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import Modal from 'react-modal'
-import Dropdown from 'react-dropdown'
-import 'react-dropdown/style.css'
 import moment from 'moment'
+import { useParams } from 'react-router-dom'
+import { fetchPatients, updatePatientStatus } from '../store/actions'
+// import { fetchPatients } from '../store/actions'
 
 const modalStyles = {
     content : {
@@ -19,7 +21,14 @@ Modal.setAppElement('#root')
 
 export default function PatientList (props) {
     const [isShowing, setIsShowing] = useState(false)
+    const [inputStatus, setInputStatus] = useState('')
     const { patient, index } = props
+    const { hospitalId } = useParams()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        patient && setInputStatus(patient.User.status)
+    }, [patient])
 
     const openModalHandler = () => {
         setIsShowing(true)
@@ -29,10 +38,27 @@ export default function PatientList (props) {
         setIsShowing(false)
     }
 
-    const options = [
-        'Waiting', 'Negative', 'Positive'
-    ];
-    const defaultOption = options[0];
+    const handleOnChangeInputStatus = (event) => {
+        event.preventDefault()
+        setInputStatus(event.target.value)
+    }
+
+    const handleOnSubmit = (event) => {
+        event.preventDefault()
+        const payload = {
+            userId: patient.User.id,
+            status: inputStatus,
+            hospitalId,
+            historyId: patient.id,
+        }
+        console.log(payload);
+        // save new status to db
+        dispatch(updatePatientStatus(payload))
+        // refetch pasien rumah sakit
+        // dispatch(fetchPatients(hospitalId))
+        // push balik ke halaman rumah sakit
+        setIsShowing(false)
+    }
 
     return(
     <>
@@ -56,7 +82,7 @@ export default function PatientList (props) {
             contentLabel="yeah this is a cool modal example"
         >
         <h3 className="mt-3">Patient Details</h3>
-        <form className="mt-4">
+        <form onSubmit={handleOnSubmit} className="mt-4">
             <div className="row">
                 <div className="form-group col-6">
                     <label >Name</label>
@@ -83,9 +109,13 @@ export default function PatientList (props) {
             </div>
             <div className="form-group dropdown">
                 <label>Result</label>
-                <Dropdown options={options} value={defaultOption} />
+                <select className="col-12 form-control" value={inputStatus} onChange={handleOnChangeInputStatus}>
+                    <option value="Waiting" disabled>Waiting</option>
+                    <option value="Negative">Negative</option>
+                    <option value="Positive">Positive</option>
+                </select>
             </div>
-            <button type="submit" className="btn btn-primary mt-3 btn-block">Save patient details</button>
+            <button type="submit" className="btn btn-primary mt-3 btn-block">Change Patient Details</button>
         </form>
         </Modal>
     </>

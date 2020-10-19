@@ -89,7 +89,7 @@ function Home() {
                 <tbody>
                     { filteredPatients.map((patient, index) => {
                         return (
-                            <PatientList patient={patient} index={index} key={patient.User.id}/>
+                            <PatientList patient={patient} index={index} key={patient.id}/>
                         )
                     })}
                 </tbody>
