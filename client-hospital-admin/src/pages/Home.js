@@ -6,7 +6,7 @@ import PatientList from '../components/patientList'
 
 function Home() {
     const [inputSearch, setInputSearch] = useState("")
-    const [resultCateogory, setResultCategory] = useState("All")
+    const [resultCategory, setResultCategory] = useState("All")
     const history = useHistory()
     const dispatch = useDispatch()
     const { patientList } = useSelector((state) => state) // how to prevent from loss if its being refreshed?
@@ -37,8 +37,10 @@ function Home() {
     }
 
     let filteredPatients = patientList
-    if(resultCateogory !== 'All') {
-        filteredPatients = patientList.filter(patient => patient.User.status === resultCateogory)
+    if(resultCategory === 'Waiting') {
+        filteredPatients = patientList.filter(patient => patient.isWaitingResult && patient.User.status === 'Negative')
+    } else if (resultCategory !== 'All') {
+        filteredPatients = patientList.filter(patient => patient.User.status === resultCategory && !patient.isWaitingResult)
     }
     if(inputSearch) {
         filteredPatients = patientList.filter(patient => patient.User.phone.includes(inputSearch))

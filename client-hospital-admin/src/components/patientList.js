@@ -73,10 +73,6 @@ export default function PatientList (props) {
                 })
             }
         })
-        // save new status to db
-        // dispatch(updatePatientStatus(payload))
-        // push balik ke halaman rumah sakit
-        // setIsShowing(false)
     }
 
     return(
