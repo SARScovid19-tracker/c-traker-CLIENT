@@ -4,6 +4,8 @@ import Modal from 'react-modal'
 import moment from 'moment'
 import { useParams } from 'react-router-dom'
 import { updatePatientStatus } from '../store/actions'
+import Swal from 'sweetalert2'
+
 
 const modalStyles = {
     content : {
@@ -50,11 +52,31 @@ export default function PatientList (props) {
             hospitalId,
             historyId: patient.id,
         }
-        console.log(payload);
+        Swal.fire({
+            title: `Are you sure the result is ${inputStatus} for ${patient.User.name}?`,
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Publish it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                console.log(payload);
+                dispatch(updatePatientStatus(payload))
+                setIsShowing(false)
+                Swal.fire({
+                    text: 'Status Changed!',
+                    title: inputStatus === 'Positive' ? `${patient.User.name} will be notified soon` :
+                    `${patient.User.name} test result is Negative`,
+                    icon: 'success'
+                })
+            }
+        })
         // save new status to db
-        dispatch(updatePatientStatus(payload))
+        // dispatch(updatePatientStatus(payload))
         // push balik ke halaman rumah sakit
-        setIsShowing(false)
+        // setIsShowing(false)
     }
 
     return(
