@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 import hospitalImg from '../assets/hospital.jpg'
 import '../assets/style.css'
 import Swal from 'sweetalert2'
+import cLogo from '../assets/logo-removebg-preview-trimmed.png'
 
 let url = 'http://localhost:3000/hospitals'
 
@@ -67,7 +68,7 @@ function Login() {
     return (
         <div className="d-flex flex-row justify-content-center flex-wrap mt-5 pt-5">
             <div className="col-12 text-center mb-3">
-                <h1>C-TRACKER LOGO HERE</h1>
+                <img src={cLogo} alt="c-tracker logo" />
             </div>
             <div className="left-login-page">
                 <div className="shadow px-4 pt-4 pb-3 my-5 bg-white rounded" style={{width: "325px", height: "275px"}}>

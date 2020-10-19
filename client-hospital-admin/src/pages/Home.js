@@ -3,13 +3,14 @@ import { useHistory, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPatients } from '../store/actions'
 import PatientList from '../components/patientList'
+import cLogo from '../assets/logo-removebg-preview-trimmed.png'
 
 function Home() {
     const [inputSearch, setInputSearch] = useState("")
     const [resultCategory, setResultCategory] = useState("All")
     const history = useHistory()
     const dispatch = useDispatch()
-    const { patientList } = useSelector((state) => state) // how to prevent from loss if its being refreshed?
+    const { patientList } = useSelector((state) => state)
     console.log(patientList, '<<< list of their patients');
     const { hospitalId } = useParams()
     
@@ -45,9 +46,7 @@ function Home() {
     if(inputSearch) {
         filteredPatients = patientList.filter(patient => patient.User.phone.includes(inputSearch))
     }
-  
-    // date published will be automatically generated after test result has been published
-    // give confirmation button after admin has updated the status
+
 
     return (
     <div className="container mt-5">
@@ -56,9 +55,9 @@ function Home() {
                 <button onClick={handleSignOut} className="pull-right btn btn-danger btn-sm">Sign out</button>
             </div>
             <div className="col-12 text-center mb-5">
-                <h1>C-TRACKER LOGO HERE FOR HOME PAGE</h1>
+                <img src={cLogo} alt="c-tracker logo" />
             </div>
-            <h3>Our Patients
+            <h3 className="mt-3">Our Patients
                 <span className="float-right row col-3 pr-0">
                         <input onChange={handleOnChangeSearch} value={inputSearch}
                             className="form-control col-12 mr-0 pr-0 pull-right" type="search" 
