@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux'
 import Modal from 'react-modal'
 import moment from 'moment'
 import { useParams } from 'react-router-dom'
-import { fetchPatients, updatePatientStatus } from '../store/actions'
-// import { fetchPatients } from '../store/actions'
+import { updatePatientStatus } from '../store/actions'
 
 const modalStyles = {
     content : {
@@ -54,8 +53,6 @@ export default function PatientList (props) {
         console.log(payload);
         // save new status to db
         dispatch(updatePatientStatus(payload))
-        // refetch pasien rumah sakit
-        // dispatch(fetchPatients(hospitalId))
         // push balik ke halaman rumah sakit
         setIsShowing(false)
     }
@@ -68,9 +65,13 @@ export default function PatientList (props) {
                     <td>{patient.User.phone}</td>
                     <td>{moment(patient.createdAt).format('LL')}</td>
                     <td>{patient.testingType}</td>
-                    <td>{patient.User.status}</td>
                     <td>{
-                            !patient.publishedAt ? "-" :
+                            patient.isWaitingResult ? "Waiting" :
+                            patient.User.status
+                        }
+                    </td>
+                    <td>{
+                            patient.isWaitingResult ? "-" :
                             moment(patient.publishedAt).format('LL')
                         }
                     </td>
