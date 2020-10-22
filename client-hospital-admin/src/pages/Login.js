@@ -4,7 +4,8 @@ import hospitalImg from '../assets/hospital_preview_rev_1.png'
 import Swal from 'sweetalert2'
 import cLogo from '../assets/logo-removebg-preview-trimmed.png'
 
-let url = 'http://localhost:3000/hospitals'
+// let url = 'http://localhost:3000/hospitals'
+let url = 'https://c-trackerr.herokuapp.com/hospitals' // deployed version
 
 const Toast = Swal.mixin({
     toast: true,

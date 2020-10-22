@@ -5,7 +5,8 @@ export const FETCH_PATIENTS = "FETCH_PATIENTS"
 export const UPDATE_PATIENTS = "UPDATE_PATIENTS"
 
 
-let url = 'http://localhost:3000/hospitals'
+// let url = 'http://localhost:3000/hospitals'
+let url = 'https://c-trackerr.herokuapp.com/hospitals' // deployed
 
 export const setLoggedInUser = (payload) => {
     return {
