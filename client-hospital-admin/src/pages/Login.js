@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import hospitalImg from '../assets/hospital.jpg'
-import '../assets/style.css'
+import hospitalImg from '../assets/hospital_preview_rev_1.png'
 import Swal from 'sweetalert2'
 import cLogo from '../assets/logo-removebg-preview-trimmed.png'
 
@@ -66,28 +65,32 @@ function Login() {
     }
 
     return (
-        <div className="d-flex flex-row justify-content-center flex-wrap mt-5 pt-5">
+        <div className="d-flex flex-row justify-content-center flex-wrap mt-3 pt-5">
             <div className="col-12 text-center mb-3">
-                <img src={cLogo} alt="c-tracker logo" />
+                <img className="w-25" src={cLogo} alt="c-tracker logo" />
             </div>
             <div className="left-login-page">
-                <div className="shadow px-4 pt-4 pb-3 my-5 bg-white rounded" style={{width: "325px", height: "275px"}}>
-                <h3>Hospital Admin</h3>
+                <div className="shadow px-4 pt-5 pb-3 my-5 bg-white rounded" style={{width: "325px", height: "325px"}}>
+                <h2 className="font-weight-bold mb-4">Hospital Admin</h2>
                 {loginError && <p className="text-danger">Please recheck your input! Must be all filled in</p>}
                 <form onSubmit={handleOnSubmit}>
-                    <input onChange={handleOnChangeEmail} value={inputEmail}
-                    className="input-form"
-                    type="email"
-                    placeholder=" Email"
-                    required
-                    />
-                    <input onChange={handleOnChangePassword} value={inputPassword}
-                    className="input-form"
-                    type="password"
-                    placeholder=" Password"
-                    required
-                    />
-                    <button type="submit">Login</button>
+                    <div className="form-group m-0">
+                        <input onChange={handleOnChangeEmail} value={inputEmail}
+                        className="form-control"
+                        type="email"
+                        placeholder=" Email"
+                        required
+                        />
+                    </div>
+                    <div className="form-group m-0">
+                        <input onChange={handleOnChangePassword} value={inputPassword}
+                        className="form-control mt-0"
+                        type="password"
+                        placeholder=" Password"
+                        required
+                        />
+                    </div>
+                    <button className="mb-3" type="submit">Login</button>
                 </form>
                 </div>
             </div>

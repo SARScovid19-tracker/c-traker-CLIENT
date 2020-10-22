@@ -4,6 +4,7 @@ import store from './store/index'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { Home, Login, Welcome } from './pages'
 import ProtectedRoute from '../src/components/ProtectedRoute'
+import './assets/style.css'
 
 function App() {
   return (

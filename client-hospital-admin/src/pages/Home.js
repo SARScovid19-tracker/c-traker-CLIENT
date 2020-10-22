@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchPatients } from '../store/actions'
+import { fetchPatients, fetchHospital } from '../store/actions'
 import PatientList from '../components/patientList'
 import cLogo from '../assets/logo-removebg-preview-trimmed.png'
 
@@ -10,7 +10,8 @@ function Home() {
     const [resultCategory, setResultCategory] = useState("All")
     const history = useHistory()
     const dispatch = useDispatch()
-    const { patientList } = useSelector((state) => state)
+    const { patientList, loggedInUser } = useSelector((state) => state)
+    console.log(loggedInUser, '<<< loggedInAdmin');
     console.log(patientList, '<<< list of their patients');
     const { hospitalId } = useParams()
     
@@ -18,6 +19,7 @@ function Home() {
         if(!localStorage.token) {
             history.push('/login')
         } else {
+            dispatch(fetchHospital(hospitalId))
             dispatch(fetchPatients(hospitalId))
         }
     }, [dispatch, history, hospitalId, inputSearch])
@@ -49,23 +51,26 @@ function Home() {
 
 
     return (
-    <div className="container mt-5">
+    <>
+    <div className="container mt-3">
         <div>
             <div className="col-12 mb-3 d-flex flex-row-reverse mr-0 pr-0">
                 <button onClick={handleSignOut} className="pull-right btn btn-danger btn-sm">Sign out</button>
+                <h5 className="pull-left mr-5 pt-2 font-weight-bold" style={{color: "#250747"}}>{loggedInUser}</h5>
             </div>
-            <div className="col-12 text-center mb-5">
-                <img src={cLogo} alt="c-tracker logo" />
+            <div className="col-12 text-center mb-5 pb-3">
+                <img className="w-25" src={cLogo} alt="c-tracker logo" />
             </div>
-            <h3 className="mt-3">Our Patients
-                <span className="float-right row col-3 pr-0">
+            <h3 className="mt-3 font-weight-bold">Our Patients
+                <span className="float-right row col-3">
                         <input onChange={handleOnChangeSearch} value={inputSearch}
-                            className="form-control col-12 mr-0 pr-0 pull-right" type="search" 
+                            className="form-control col-12 pull-right bg-white rounded" 
+                            type="search" 
                             placeholder="Search by phone number" aria-label="Search"
                         />
                 </span>
                 <span className="float-right row col-2 pr-0 mr-3">
-                        <select className="col-9 form-control" onChange={handleOnChangeCategory}>
+                        <select className="col-9 form-control  bg-white rounded" onChange={handleOnChangeCategory}>
                             <option className="col-12" value="All">All</option>
                             <option className="col-12" value="Waiting">Waiting</option>
                             <option className="col-12" value="Negative">Negative</option>
@@ -74,8 +79,8 @@ function Home() {
                 </span>
             </h3>
         </div>
-        <div className="justify-content-center mt-5">
-            <table className="table table-hover">
+        <div className="justify-content-center mt-5 shadow bg-white rounded">
+            <table className="table table-striped table-borderless mb-0">
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -85,6 +90,7 @@ function Home() {
                     <th scope="col">Type</th>
                     <th scope="col">Result</th>
                     <th scope="col">Published Date</th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -97,6 +103,7 @@ function Home() {
             </table>
         </div>
     </div>
+    </>
     )
 }
 

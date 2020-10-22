@@ -1,7 +1,8 @@
-import { SET_PATIENTS_LIST } from './actions'
+import { SET_PATIENTS_LIST, SET_LOGGED_IN_USER } from './actions'
 
 const initialState = {
-    patientList: []
+    patientList: [],
+    loggedInUser: ''
 }
 
 export default function reducer(state=initialState, action) {
@@ -10,6 +11,11 @@ export default function reducer(state=initialState, action) {
             return {
                 ...state,
                 patientList: action.payload
+            }
+        case SET_LOGGED_IN_USER:
+            return {
+                ...state,
+                loggedInUser: action.payload
             }
         default:
             return state;

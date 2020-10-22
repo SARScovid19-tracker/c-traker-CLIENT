@@ -1,14 +1,33 @@
+export const SET_LOGGED_IN_USER = "SET_LOGGED_IN_USER"
 export const SET_PATIENTS_LIST = "SET_PATIENTS_LIST"
 export const LOGIN = "LOGIN" // in login page
 export const FETCH_PATIENTS = "FETCH_PATIENTS"
 export const UPDATE_PATIENTS = "UPDATE_PATIENTS"
 
+
 let url = 'http://localhost:3000/hospitals'
+
+export const setLoggedInUser = (payload) => {
+    return {
+        type: SET_LOGGED_IN_USER,
+        payload
+    }
+}
 
 export const setPatientList = (payload) => {
     return {
         type: SET_PATIENTS_LIST,
         payload
+    }
+}
+
+export const fetchHospital = (hospitalId) => {
+    return(dispatch) => {
+        fetch(url + `/${hospitalId}`)
+            .then(res => res.json())
+            .then(hospitalData => {
+                dispatch(setLoggedInUser(hospitalData.name))
+            })
     }
 }
 
