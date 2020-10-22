@@ -7,6 +7,12 @@
     color: #6c757d;
 }
 
+.tableFixedHead thead th{
+    position: sticky;
+    top: 0;
+    background: white
+}
+
 body {
     overflow-x: hidden;
     background: #fafbfe;

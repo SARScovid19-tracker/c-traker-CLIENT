@@ -28,7 +28,10 @@ export default function PatientList (props) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        patient && setInputStatus(patient.User.status)
+        if(patient){
+            patient.isWaitingResult ? setInputStatus('Waiting') :
+            setInputStatus(patient.User.status)
+        }
     }, [patient])
 
     const openModalHandler = () => {

@@ -79,7 +79,7 @@ function Home() {
                 </span>
             </h3>
         </div>
-        <div className="justify-content-center mt-5 shadow bg-white rounded">
+        <div className="justify-content-center mt-5 shadow bg-white rounded tableFixedHead" style={{ overflowY: "scroll",  height: "425px"}}>
             <table className="table table-striped table-borderless mb-0">
                 <thead>
                 <tr>
